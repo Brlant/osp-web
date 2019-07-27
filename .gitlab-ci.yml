@@ -18,6 +18,6 @@ local-build:
   stage: build
   script:
     - npm run build
-    - scp -r dist/* root@172.25.10.10:/opt/dev-web-dist/openapi
+    - scp -r dist/* root@172.25.10.10:/opt/dev-web-dist/osp
   only:
     - master
