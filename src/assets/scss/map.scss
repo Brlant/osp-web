@@ -1,0 +1,6 @@
+.amap-marker-label {
+  border-color: red;
+  &.active {
+    border-color: #0000ff;
+  }
+}

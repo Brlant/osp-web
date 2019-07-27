@@ -1,0 +1,53 @@
+.form-header-part {
+  padding: 0 10px;
+  .header {
+    line-height: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    .sign {
+      width: 4px;
+      background: $activeColor;
+      height: 100%;
+    }
+    .tit {
+      margin: 0 0 0 10px;
+      &.active {
+        color: $activeColor
+      }
+    }
+  }
+
+  .add-info-part {
+    margin: 2px 0;
+    padding: 10px;
+    background: #f7f9fb;
+    .btn-search-toggle, .btn-circle {
+      background: #fff;
+    }
+    .btn-circle:hover {
+      color: $activeColor;
+    }
+    .des-btn:hover {
+      .btn-circle {
+        color: $activeColor;
+      }
+    }
+  }
+}
+
+// 折行
+.acrony-my {
+  .el-form-item__label {
+    line-height: 20px;
+  }
+}
+
+.opera-btn span:hover {
+  color: $activeColor;
+  cursor: pointer;
+  a {
+    background: $activeColor;
+    color: #fff;
+  }
+}

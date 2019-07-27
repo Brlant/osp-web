@@ -1,0 +1,47 @@
+{
+  "name": "openapi-admin",
+  "description": "openapi前台",
+  "version": "1.0.0",
+  "author": "Hulk <jayzch@qq.com>",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@dtop/dtop-web-common": "git+https://g.sinopharm-bio.com/dtop/dtop-web-common.git#V2.1.1",
+    "axios": "^0.16.1",
+    "babel-polyfill": "^6.26.0",
+    "element-ui": "^2.11.1",
+    "js-base64": "^2.4.9",
+    "moment": "^2.22.2",
+    "qs": "^6.5.2",
+    "vue": "^2.6.8",
+    "vue-amap": "^0.5.10",
+    "vue-moment": "^2.2.0",
+    "vue-router": "^2.8.1",
+    "vuex": "^2.5.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.9.2",
+    "@vue/cli-plugin-eslint": "^3.9.2",
+    "@vue/cli-service": "^3.9.3",
+    "babel-eslint": "^10.0.2",
+    "copy-webpack-plugin": "^4.6.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^6.0.7",
+    "vue-template-compiler": "^2.6.8"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

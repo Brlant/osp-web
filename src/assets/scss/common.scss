@@ -1,0 +1,126 @@
+[v-cloak] {
+  display: none
+}
+
+.app-body {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 62px;
+}
+
+.main-body {
+  height: calc(100% - 62px);
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.body_scroll {
+  height: 100%;
+  .el-scrollbar__wrap {
+    overflow-x: hidden;
+  }
+}
+
+.app-content-view {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.full-width .container {
+  width: auto;
+}
+
+.full-width .container.d-table {
+  width: calc(100% - 30px);
+}
+
+.main-header, .sub-menu {
+  .container {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+.sub-menu {
+  background: #eee;
+}
+
+.search-left-box {
+  padding: 5px;
+}
+
+.page-main-body {
+  font-size: 14px;
+  .el-row {
+    margin-bottom: 10px;
+    line-height: 20px;
+  }
+  .order-list-item {
+    .el-row {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// 二级菜单样式
+.sub-menu {
+  padding: 5px 0;
+  .btn-sub-menu {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    &.active, &:hover {
+      background: $activeColor;
+      color: $activeColorFont;
+    }
+  }
+}
+
+// 加载中背景无色
+.order-list {
+  .loading-rotation.el-loading-parent--relative {
+    z-index: 40;
+    .el-loading-mask {
+      background-color: transparent;
+      z-index: 41;
+    }
+  }
+}
+
+
+// 滚动容器
+.d-table-col-wrap {
+  //overflow: hidden;
+  //.el-scrollbar__wrap {
+  //  overflow: hidden;
+  //  overflow-y: auto;
+  //}
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+// 下拉组件长度
+.el-select {
+  display: block;
+  position: relative;
+}
+
+// 日期组件长度
+.el-date-editor.el-input {
+  width: 100%;
+}
+
+// 瀑布流排列信息
+.waterfall-part {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2;
+  >.el-col-12 {
+    float: none;
+    width: auto;
+    break-inside: avoid;
+  }
+}
