@@ -111,13 +111,13 @@ export default [{
   }],
   'leaf': false
 }, {
-  'id': 'openapi-system-config', 'parentId': null, 'label': '系统设置', 'sort': 2, 'children': [{
-    'id': 'openapi-user-role-manager',
+  'id': 'system-config', 'parentId': null, 'label': '系统设置', 'sort': 2, 'children': [{
+    'id': 'access-role-manager',
     'parentId': 'openapi-system-config',
     'label': '角色管理',
     'sort': 2,
     'children': [{
-      'id': 'openapi-access-role-edit',
+      'id': 'access-role-edit',
       'parentId': 'openapi-user-role-manager',
       'label': '编辑角色',
       'sort': null,
@@ -131,14 +131,14 @@ export default [{
       'children': null,
       'leaf': true
     }, {
-      'id': 'openapi-access-role-add',
+      'id': 'access-role-add',
       'parentId': 'openapi-user-role-manager',
       'label': '新增角色',
       'sort': null,
       'children': null,
       'leaf': true
     }, {
-      'id': 'openapi-access-role-watch',
+      'id': 'access-role-watch',
       'parentId': 'openapi-user-role-manager',
       'label': '查看角色',
       'sort': null,
