@@ -130,9 +130,15 @@ export const Department = resource('/department', http, {
 });
 
 // 货主用户权限对象
-export const OrgUser = resource('/oms/user/org', http, {
+export const OrgUser = resource('/dhs/user/org', http, {
   queryOrgInfo: (id, params) => {
-    return http.get('/oms/user/org/' + id, {params});
+    return http.get('/dhs/user/org/' + id, {params});
+  },
+  queryUsers: (id, params) => {
+    return http.get('/dhs/user/org/' + id, {params});
+  },
+  updateOrgUser: (id, params) => {
+    return http.put('/dhs/user/org/' + id, params);
   }
 });
 
@@ -195,13 +201,13 @@ export const Access = resource('/oms/access', http, {
 
 export const Auth = {
   checkLogin: () => {
-    return http.get('/userinfo');
+    return http.get('/dhs/userinfo');
   },
   login: (data) => {
-    return http.post('/login', data);
+    return http.post('/dhs/login', data);
   },
   logout: () => {
-    return http.get('/logout');
+    return http.get('/dhs/logout');
   },
   isLogin () {
     try {
@@ -211,7 +217,7 @@ export const Auth = {
     }
   },
   permission: () => {
-    return http.get('/oms/access/permissions', {params: {objectId: 'openapi-system'}}); // TODO 改成tms-system
+    return http.get('/oms/access/permissions', {params: {objectId: 'openapi-system'}});
   }
 };
 

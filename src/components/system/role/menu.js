@@ -111,7 +111,12 @@ export default [{
   }],
   'leaf': false
 }, {
-  'id': 'system-config', 'parentId': null, 'label': '系统设置', 'sort': 2, 'children': [{
+  'id': 'system-config',
+  'parentId': null,
+  'label': '系统设置',
+  'sort': 2,
+  'children': [
+    {
     'id': 'access-role-manager',
     'parentId': 'openapi-system-config',
     'label': '角色管理',
@@ -174,54 +179,35 @@ export default [{
       'leaf': true
     }],
     'leaf': false
-  }, {
-    'id': 'openapi-platform-user-manager',
-    'parentId': 'openapi-system-config',
-    'label': '平台用户管理',
-    'sort': 1,
-    'children': [{
-      'id': 'openapi-department-add',
-      'parentId': 'openapi-platform-user-manager',
-      'label': '新增部门',
-      'sort': null,
-      'children': null,
-      'leaf': true
-    }, {
-      'id': 'openapi-platform-user-watch',
-      'parentId': 'openapi-platform-user-manager',
-      'label': '查看平台用户',
-      'sort': null,
-      'children': null,
-      'leaf': true
-    }, {
-      'id': 'openapi-platform-user-edit',
-      'parentId': 'openapi-platform-user-manager',
-      'label': '编辑平台用户',
-      'sort': null,
-      'children': null,
-      'leaf': true
-    }, {
-      'id': 'openapi-platform-user-add',
-      'parentId': 'openapi-platform-user-manager',
-      'label': '新增平台用户',
-      'sort': null,
-      'children': null,
-      'leaf': true
-    }, {
-      'id': 'openapi-department-delete',
-      'parentId': 'openapi-platform-user-manager',
-      'label': '删除部门',
-      'sort': null,
-      'children': null,
-      'leaf': true
-    }, {
-      'id': 'openapi-department-edit',
-      'parentId': 'openapi-platform-user-manager',
-      'label': '修改部门',
-      'sort': null,
-      'children': null,
-      'leaf': true
+  },
+    {
+      'id': 'mdm-org-user-manager',
+      'parentId': 'system-config',
+      'label': '单位用户管理',
+      'sort': 1,
+      'children': [{
+        'id': 'mdm-manufacture-oms-org-user-watch',
+        'parentId': 'mdm-org-user-manager',
+        'label': '查看单位用户',
+        'sort': null,
+        'children': null,
+        'leaf': true
+      }, {
+        'id': 'mdm-manufacture-oms-org-user-edit',
+        'parentId': 'mdm-org-user-manager',
+        'label': '编辑单位用户',
+        'sort': null,
+        'children': null,
+        'leaf': true
+      }, {
+        'id': 'mdm-manufacture-oms-org-user-add',
+        'parentId': 'mdm-org-user-manager',
+        'label': '新增单位用户',
+        'sort': null,
+        'children': null,
+        'leaf': true
+      }],
+      'leaf': false
     }],
     'leaf': false
-  }], 'leaf': false
 }, {'id': 'openapi-request-log', 'parentId': null, 'label': '请求日志', 'sort': 3, 'children': null, 'leaf': true}];

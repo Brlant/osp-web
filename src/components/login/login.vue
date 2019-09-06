@@ -41,9 +41,9 @@
       <div style="padding:20px">
         <el-form label-position="top" ref="loginForm" label-width="80px" :model="user" :rules="rules"
                  @submit.prevent="done" onsubmit="return false">
-          <!--<el-form-item label="系统代码" prop="orgCode">-->
-          <!--<oms-input v-model="user.orgCode"></oms-input>-->
-          <!--</el-form-item>-->
+          <el-form-item label="系统代码" prop="orgCode">
+          <oms-input v-model="user.orgCode"></oms-input>
+          </el-form-item>
           <el-form-item label="用户名" prop="username">
             <oms-input v-model="user.username" placeholder="手机号/邮箱/用户名"></oms-input>
           </el-form-item>
@@ -89,13 +89,16 @@
           password: '123456',
           validateCode: '',
           type: 0,
-          orgCode: ''
+          orgCode: window.localStorage.getItem('orgCode') ? JSON.parse(window.localStorage.getItem('orgCode')) : ''
         },
         loading: false,
         codeUrl: '',
         showCode: false,
         btnString: '登录',
         rules: {
+          orgCode: [
+            {required: true, message: '请输入系统代码', trigger: ['blur', 'change']}
+          ],
           username: [
             {required: true, message: '请输入用户名', trigger: 'blur'}
           ],

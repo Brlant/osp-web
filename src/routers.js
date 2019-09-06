@@ -56,9 +56,9 @@ export const routes = [
         meta: {moduleId: 'permission', title: '系统设置', icon: 'setting', perm: 'system-config'},
         children: [
           {
-            path: '/permission/user',
-            component: () => import('./components/system/user/user.vue'),
-            meta: {moduleId: 'permission', title: '平台用户管理', perm: 'openapi-platform-user-manager'}
+            path: '/permission/account',
+            component: () => import('./components/system/account/list.vue'),
+            meta: {moduleId: 'permission', title: '单位用户管理', perm: 'mdm-org-user-manager'}
           },
           {
             path: '/permission/role',
