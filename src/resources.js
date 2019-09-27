@@ -114,18 +114,18 @@ export const OmsAttachment = resource('/omsAttachment', http, {
 });
 
 // 部门对象
-export const Department = resource('/dhs/department', http, {
+export const Department = resource('/department', http, {
   getPage: (params) => {
-    return http.get('/dhs/department/page', {params});
+    return http.get('/department/page', {params});
   },
   getOnesMember: (id, params) => {
-    return http.get('/dhs/department/' + id + '/member', {params});
+    return http.get('/department/' + id + '/member', {params});
   },
   getMembers: (params) => {
-    return http.get('/dhs/department/members', {params});
+    return http.get('/department/members', {params});
   },
   queryStateNum: (params) => {
-    return http.get('/dhs/department/member/count', {params});
+    return http.get('/department/member/count', {params});
   }
 });
 
