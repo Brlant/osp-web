@@ -164,7 +164,7 @@
         }
       };
       return {
-        user: {account: '', code: '', type: 0, orgCode: '', email: '', phoneCode: '', phone: ''},
+        user: {account: '', code: '', type: 1, orgCode: '', email: '', phoneCode: '', phone: ''},
         resetUser: {userId: '', code: '', password: '', password2: ''},
         resetUserRules: {
           code: [

@@ -85,10 +85,10 @@
     data: () => {
       return ({
         user: {
-          username: 'jayzch@qq.com',
-          password: '123456',
+          username: '',
+          password: '',
           validateCode: '',
-          type: 0,
+          type: 1,
           orgCode: window.localStorage.getItem('orgCode') ? JSON.parse(window.localStorage.getItem('orgCode')) : ''
         },
         loading: false,
