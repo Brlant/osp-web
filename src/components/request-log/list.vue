@@ -93,6 +93,16 @@
         <el-table-column prop="requestDomain" label="请求域名" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestPath" label="请求路径" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestUrl" label="请求URL" :sortable="true" width="200"></el-table-column>
+        <el-table-column prop="requestBody" label="请求内容" :sortable="true" width="300">
+          <div slot-scope="{row}" style="overflow: auto;max-height: 150px">
+            {{row.requestBody}}
+          </div>
+        </el-table-column>
+        <el-table-column prop="responseBody" label="返回内容" :sortable="true" width="300">
+          <div slot-scope="{row}" style="overflow: auto;max-height: 150px">
+            {{row.responseBody}}
+          </div>
+        </el-table-column>
         <el-table-column prop="requestApiStageName" label="请求环境名称" :sortable="true" width="150"></el-table-column>
         <el-table-column prop="requestHttpMethod" label="请求方法" :sortable="true" width="130"></el-table-column>
         <el-table-column prop="requestStatusCode" label="HTTP状态码" :sortable="true" width="130"></el-table-column>
