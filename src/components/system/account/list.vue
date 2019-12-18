@@ -36,7 +36,7 @@
           </span>
           {{ type === 1 ? '系统账号管理' : '账号分配' }}
         </h2>
-        <div class="d-table-col-wrap" :style="'height:'+ (bodyHeight - 60) + 'px'" @scroll="scrollLoadingData">
+        <div class="d-table-col-wrap" :style="'height:'+ bodyHeight + 'px'" @scroll="scrollLoadingData">
           <div class="search-left-box" v-show="showTypeSearch">
             <oms-input v-model="typeTxt" placeholder="请输入名称搜索" :showFocus="showTypeSearch"></oms-input>
           </div>
@@ -220,7 +220,7 @@
     computed: {
       bodyHeight: function () {
         let height = parseInt(this.$store.state.bodyHeight, 10);
-        height = (height + 50);
+        height = (height - 20);
         return height;
       },
       type() {
@@ -276,6 +276,7 @@
         });
       },
       scrollLoadingData(event) {
+        console.log(22);
         this.$scrollLoadingData(event);
       },
       resetRightBox: function () {

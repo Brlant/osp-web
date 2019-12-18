@@ -38,6 +38,10 @@ Vue.prototype.$scrollLoadingData = function (event) {
       this.$store.commit('initBottomLoading', true);
       this.getOrgMore();
     }
+    if (this.getOrgMore && this.typePager.currentPage < this.typePager.totalPage && !this.$store.state.bottomLoading) {
+      this.$store.commit('initBottomLoading', true);
+      this.getOrgMore();
+    }
   }
 };
 
