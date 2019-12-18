@@ -50,6 +50,12 @@ export const routes = [
           }
         ]
       },
+      // {
+      //   path: '/api/config',
+      //   component: () => import('./components/api-config/list.vue'),
+      //   meta: {moduleId: 'api-config', title: '接口设置', icon: 'basic', perm: 'openapi-request-log'},
+      //   children: []
+      // },
       {
         path: '/permission',
         component: () => import('./components/system/index.vue'),

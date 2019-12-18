@@ -103,7 +103,6 @@
             {{row.responseBody}}
           </div>
         </el-table-column>
-        <el-table-column prop="requestApiStageName" label="请求环境名称" :sortable="true" width="150"></el-table-column>
         <el-table-column prop="requestHttpMethod" label="请求方法" :sortable="true" width="130"></el-table-column>
         <el-table-column prop="requestStatusCode" label="HTTP状态码" :sortable="true" width="130"></el-table-column>
         <el-table-column prop="requestErrorMessage" label="错误信息" :sortable="true" width="200"></el-table-column>

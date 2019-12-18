@@ -55,8 +55,7 @@ export default {
                   id: child.id,
                   label: child.name,
                   leaf: false,
-                  parentId: child.parentId,
-                  children: []
+                  parentId: child.parentId
                 };
                 childs.push(childData);
               });
