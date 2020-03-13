@@ -300,7 +300,7 @@
           endTime: ''
         };
         this.expectedTime = '';
-        Object.assign({}, this.searchWord);
+        this.filters = Object.assign({}, this.searchWord);
         this.getLogPager(1);
       },
       formatTimeToRangeByFormat(time, type) {
