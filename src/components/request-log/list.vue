@@ -136,6 +136,18 @@
           </el-row>
           <el-row>
             <el-col :span="8">
+              <oms-form-row label="请求body" :span="8">
+                <oms-input type="text" v-model="searchWord.requestBody" placeholder="请输入请求body"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="响应body" :span="8">
+                <oms-input type="text" v-model="searchWord.responseBody" placeholder="请输入响应body"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
               <oms-form-row label="" :span="8">
                 <el-button type="primary" native-type="submit" @click="searchInOrder">查询</el-button>
                 <el-button native-type="reset" @click="resetSearchForm">重置</el-button>
@@ -160,6 +172,17 @@
         <el-table-column prop="requestUrl" label="请求URL" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestApiStageName" label="请求环境名称" :sortable="true" width="150"></el-table-column>
         <el-table-column prop="requestHttpMethod" label="请求方法" :sortable="true" width="130"></el-table-column>
+
+        <el-table-column prop="requestBody" label="请求body" :sortable="true" min-width="200">
+          <div style="max-height: 150px;overflow: auto" slot-scope="{row}">
+            {{row.requestBody}}
+          </div>
+        </el-table-column>
+        <el-table-column prop="responseBody" label="响应body" :sortable="true" min-width="200">
+          <div style="max-height: 150px;overflow: auto" slot-scope="{row}">
+            {{row.responseBody}}
+          </div>
+        </el-table-column>
         <el-table-column prop="requestStatusCode" label="HTTP状态码" :sortable="true" width="130"></el-table-column>
         <el-table-column prop="requestErrorMessage" label="错误信息" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestException" label="异常信息" :sortable="true" width="200"></el-table-column>
