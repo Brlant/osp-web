@@ -45,33 +45,110 @@
             <span v-show="!showSearch">展开筛选</span>
           </span>
         </div>
-        <el-form class="advanced-query-form" onsubmit="return false">
+        <el-form class="advanced-query-form" onsubmit="return false" v-show="showSearch">
           <el-row>
-            <el-col :span="6">
-              <oms-form-row label="调用者IP" :span="7">
-                <oms-input type="text" v-model="searchWord.requestClientIp" placeholder="请输入调用者IP"
-                           @keyup.native.enter="searchInOrder"></oms-input>
-              </oms-form-row>
-            </el-col>
-            <el-col :span="6">
-              <oms-form-row label="调用者应用ID" :span="8">
-                <oms-input type="text" v-model="searchWord.requestAppId" placeholder="请输入调用者应用ID"
-                           @keyup.native.enter="searchInOrder"></oms-input>
-              </oms-form-row>
-            </el-col>
             <el-col :span="8">
               <oms-form-row label="日志请求时间" :span="8">
                 <el-col :span="24">
                   <el-date-picker
                     v-model="expectedTime"
-                    type="daterange"
-                    placeholder="请选择" format="yyyy-MM-dd">
+                    type="datetimerange"
+                    :default-time="['00:00:00', '23:59:59']"
+                    placeholder="请选择">
                   </el-date-picker>
                 </el-col>
               </oms-form-row>
             </el-col>
-            <el-col :span="4">
-              <oms-form-row label="" :span="6">
+            <el-col :span="8">
+              <oms-form-row label="请求域名" :span="7">
+                <oms-input type="text" v-model="searchWord.requestDomain" placeholder="请输入请求域名"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="请求路径" :span="8">
+                <oms-input type="text" v-model="searchWord.requestPath" placeholder="请输入请求路径"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+          </el-row>
+          <el-row>
+
+            <el-col :span="8">
+              <oms-form-row label="请求URL" :span="8">
+                <oms-input type="text" v-model="searchWord.requestUrl" placeholder="请输入请求URL"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="请求环境名称" :span="8">
+                <oms-input type="text" v-model="searchWord.requestApiStageName" placeholder="请输入请求环境名称"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="请求方法" :span="8">
+                <oms-input type="text" v-model="searchWord.requestHttpMethod" placeholder="请输入请求方法"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+          </el-row>
+          <el-row>
+
+            <el-col :span="8">
+              <oms-form-row label="HTTP状态码" :span="8">
+                <oms-input type="text" v-model="searchWord.requestStatusCode" placeholder="请输入HTTP状态码"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="错误信息" :span="8">
+                <oms-input type="text" v-model="searchWord.requestErrorMessage" placeholder="请输入错误信息"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="异常信息" :span="8">
+                <oms-input type="text" v-model="searchWord.requestException" placeholder="请输入异常信息"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <oms-form-row label="请求处理时间" :span="8">
+                <oms-input type="text" v-model="searchWord.requestHandleTime" placeholder="请输入请求处理时间"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="请求大小" :span="8">
+                <oms-input type="text" v-model="searchWord.requestSize" placeholder="请输入请求大小"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="响应大小" :span="8">
+                <oms-input type="text" v-model="searchWord.responseSize" placeholder="请输入响应大小"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="8">
+              <oms-form-row label="请求body" :span="8">
+                <oms-input type="text" v-model="searchWord.requestBody" placeholder="请输入请求body"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="响应body" :span="8">
+                <oms-input type="text" v-model="searchWord.responseBody" placeholder="请输入响应body"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="" :span="8">
                 <el-button type="primary" native-type="submit" @click="searchInOrder">查询</el-button>
                 <el-button native-type="reset" @click="resetSearchForm">重置</el-button>
               </oms-form-row>
@@ -93,17 +170,19 @@
         <el-table-column prop="requestDomain" label="请求域名" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestPath" label="请求路径" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestUrl" label="请求URL" :sortable="true" width="200"></el-table-column>
-        <el-table-column prop="requestBody" label="请求内容" :sortable="true" width="300">
-          <div slot-scope="{row}" style="overflow: auto;max-height: 150px">
+        <el-table-column prop="requestApiStageName" label="请求环境名称" :sortable="true" width="150"></el-table-column>
+        <el-table-column prop="requestHttpMethod" label="请求方法" :sortable="true" width="130"></el-table-column>
+
+        <el-table-column prop="requestBody" label="请求body" :sortable="true" min-width="200">
+          <div style="max-height: 150px;overflow: auto" slot-scope="{row}">
             {{row.requestBody}}
           </div>
         </el-table-column>
-        <el-table-column prop="responseBody" label="返回内容" :sortable="true" width="300">
-          <div slot-scope="{row}" style="overflow: auto;max-height: 150px">
+        <el-table-column prop="responseBody" label="响应body" :sortable="true" min-width="200">
+          <div style="max-height: 150px;overflow: auto" slot-scope="{row}">
             {{row.responseBody}}
           </div>
         </el-table-column>
-        <el-table-column prop="requestHttpMethod" label="请求方法" :sortable="true" width="130"></el-table-column>
         <el-table-column prop="requestStatusCode" label="HTTP状态码" :sortable="true" width="130"></el-table-column>
         <el-table-column prop="requestErrorMessage" label="错误信息" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestException" label="异常信息" :sortable="true" width="200"></el-table-column>
@@ -113,9 +192,9 @@
       </el-table>
       <div class="text-center" v-show="(logList.length || pager.currentPage !== 1) && !loadingData">
         <el-cu-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                       :current-page="pager.currentPage"
-                       :page-sizes="[10,20,100]" :page-size="10" layout="sizes, prev, pager, next, jumper"
-                       :total="pager.count">
+                          :current-page="pager.currentPage"
+                          :page-sizes="[10,20,100]" :page-size="10" layout="sizes, prev, pager, next, jumper"
+                          :total="pager.count">
         </el-cu-pagination>
       </div>
     </div>
@@ -231,8 +310,8 @@
         this.showDetailPart = false;
       },
       searchInOrder: function () {// 搜索
-        this.searchWord.startTime = this.formatTimeToRangeByFormat(this.$formatAryTime(this.expectedTime, 0));
-        this.searchWord.endTime = this.formatTimeToRangeByFormat(this.$formatAryTime(this.expectedTime, 1), 1);
+        this.searchWord.startTime = this.$formatAryTime(this.expectedTime, 0);
+        this.searchWord.endTime = this.$formatAryTime(this.expectedTime, 1);
         Object.assign(this.filters, this.searchWord);
         this.getLogPager(1);
       },
@@ -244,7 +323,7 @@
           endTime: ''
         };
         this.expectedTime = '';
-        Object.assign(this.filters, this.searchWord);
+        this.filters = Object.assign({}, this.searchWord);
         this.getLogPager(1);
       },
       formatTimeToRangeByFormat(time, type) {

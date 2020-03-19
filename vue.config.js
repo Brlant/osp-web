@@ -12,7 +12,7 @@ module.exports = {
     https: false,
     hotOnly: false, disableHostCheck: true, proxy: {
       '/api': {
-        target: 'https://hp-osp.cdcerp.cn',
+        target: 'https://dev-osp.cdcerp.cn',
         changOrigin: true
       }
     }

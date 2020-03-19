@@ -122,14 +122,6 @@
               this.$store.commit('initCode', this.user.orgCode);
               this.$store.commit('initUser', response.data);
               this.$nextTick(function () {
-                if (userId === response.data.userId) {
-                  let lastUrl = window.localStorage.getItem('lastUrl');
-                  if (lastUrl && lastUrl.indexOf('/login') === -1 && lastUrl.indexOf('/logout') === -1) {
-                    window.localStorage.removeItem('lastUrl');
-                    window.location.href = lastUrl;
-                    return lastUrl;
-                  }
-                }
                 this.$router.push('/');
               });
             }, error => {
