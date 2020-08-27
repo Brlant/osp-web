@@ -161,10 +161,10 @@ export const User = resource('/oms/user', http, {
     return http.post('/oms/user/password/verifyMail', obj);
   },
   stopUser: (userId) => {
-    return http.put(`/oms/user/${userId}/stop`);
+    return http.put(`/dhs/user/${userId}/stop`);
   },
   enableUser: (userId) => {
-    return http.put(`/oms/user/${userId}/enablement`);
+    return http.put(`/dhs/user/${userId}/enablement`);
   }
 });
 
