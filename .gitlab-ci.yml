@@ -19,5 +19,3 @@ local-build:
   script:
     - npm run build
     - scp -r dist/* root@172.25.10.10:/opt/dev-web-dist/osp
-  only:
-    - dev
