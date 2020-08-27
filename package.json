@@ -1,7 +1,7 @@
 {
   "name": "openapi-admin",
   "description": "openapi前台",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "author": "Hulk <jayzch@qq.com>",
   "private": true,
   "scripts": {
