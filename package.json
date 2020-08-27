@@ -1,12 +1,13 @@
 {
   "name": "openapi-admin",
   "description": "openapi前台",
-  "version": "1.0.0",
+  "version": "3.6.0",
   "author": "Hulk <jayzch@qq.com>",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "postversion": "git push --follow-tags",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
