@@ -131,7 +131,7 @@
 </template>
 
 <script>
-  import {User, http} from '../../resources';
+  import {http, User} from '../../resources';
 
   const timeInterval = 60;
   let phoneReg = /^1[0-9]{10}$/;
@@ -231,7 +231,7 @@
         this.codeUrl = process.env.VUE_APP_API + '/foundation/CAPTCHA?' + Math.random();
       },
       resend: function () {
-        http.get('/oms/user/' + this.userId + '/password/verifyMail/resend').then(response => {// 验证
+        http.get('/dhs/user/' + this.userId + '/password/verifyMail/resend').then(response => {// 验证
           this.user.email = response.data.email;
           this.$notify.info({
             message: '发送成功'
@@ -245,7 +245,7 @@
       resendSMS: function () {
         this.leftTime = timeInterval;
         this.setTimer();
-        http.get('/oms/user/' + this.userId + '/password/verifySMS/resend').then(response => {// 验证
+        http.get('/dhs/user/' + this.userId + '/password/verifySMS/resend').then(response => {// 验证
           this.$notify.info({
             message: '发送成功'
           });
@@ -268,7 +268,7 @@
           if (valid) {
             this.loading = true;
             let data = Object.assign({}, this.resetUser, {userId: this.userId});
-            http.put('/oms/user/phone/reset-psw', data).then(response => {// 验证
+            http.put('/dhs/user/phone/reset-psw', data).then(response => {// 验证
               this.$notify.info({
                 message: '重置成功'
               });

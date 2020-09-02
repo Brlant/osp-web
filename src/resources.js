@@ -143,22 +143,22 @@ export const OrgUser = resource('/dhs/user/org', http, {
 });
 
 // 平台用户权限对象
-export const User = resource('/oms/user', http, {
+export const User = resource('/dhs/user', http, {
   checkEmail: (email, userId, orgId) => {
-    return http.get('/oms/user/email', {
+    return http.get('/dhs/user/email', {
       params: {email: email, userId: userId, orgId: orgId}
     });
   },
   checkPhone: (phone, userId, orgId) => {
-    return http.get('/oms/user/phone', {
+    return http.get('/dhs/user/phone', {
       params: {phone: phone, userId: userId, orgId: orgId}
     });
   },
   resetPsw: (Obj) => {
-    return http.put('/oms/user/password', Obj);
+    return http.put('/dhs/user/password', Obj);
   },
   forget: (obj) => {
-    return http.post('/oms/user/password/verifyMail', obj);
+    return http.post('/dhs/user/password/verifyMail', obj);
   },
   stopUser: (userId) => {
     return http.put(`/dhs/user/${userId}/stop`);
@@ -277,7 +277,7 @@ export const BaseInfo = resource('/orgs', http, {
   },
   // 校验邮箱
   checkEmail: (email, userId) => {
-    return http.get('/oms/user/email', {
+    return http.get('/dhs/user/email', {
       params: {email: email, userId: userId}
     });
   },

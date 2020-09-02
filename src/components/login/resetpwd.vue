@@ -65,7 +65,7 @@
 </template>
 
 <script>
-  import { http } from '../../resources';
+  import {http} from '../../resources';
 
   export default {
     name: 'resetpwd',
@@ -102,7 +102,7 @@
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {
             this.loading = true;
-            http.put('/oms/user/reset/password', this.user).then(() => {// 验证
+            http.put('/dhs/user/reset/password', this.user).then(() => {// 验证
               this.showInfo = true;
               this.$notify.info({
                 message: '重置成功'
