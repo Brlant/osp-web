@@ -56,23 +56,23 @@ export const routes = [
       //   meta: {moduleId: 'api-config', title: '接口设置', icon: 'basic', perm: 'openapi-request-log'},
       //   children: []
       // },
-      {
-        path: '/permission',
-        component: () => import('./components/system/index.vue'),
-        meta: {moduleId: 'permission', title: '系统设置', icon: 'setting', perm: 'system-config'},
-        children: [
-          {
-            path: '/permission/account',
-            component: () => import('./components/system/account/list.vue'),
-            meta: {moduleId: 'permission', title: '单位用户管理', perm: 'mdm-org-user-manager'}
-          },
-          {
-            path: '/permission/role',
-            component: () => import('./components/system/role/role.vue'),
-            meta: {moduleId: 'permission', title: '角色管理', perm: 'access-role-watch'}
-          }
-        ]
-      },
+      // {
+      //   path: '/permission',
+      //   component: () => import('./components/system/index.vue'),
+      //   meta: {moduleId: 'permission', title: '系统设置', icon: 'setting', perm: 'system-config'},
+      //   children: [
+      //     {
+      //       path: '/permission/account',
+      //       component: () => import('./components/system/account/list.vue'),
+      //       meta: {moduleId: 'permission', title: '单位用户管理', perm: 'mdm-org-user-manager'}
+      //     },
+      //     {
+      //       path: '/permission/role',
+      //       component: () => import('./components/system/role/role.vue'),
+      //       meta: {moduleId: 'permission', title: '角色管理', perm: 'access-role-watch'}
+      //     }
+      //   ]
+      // },
       {
         path: '/request-log',
         component: () => import('./components/request-log/list.vue'),
