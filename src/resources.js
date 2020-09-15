@@ -217,7 +217,7 @@ export const Auth = {
     }
   },
   permission: () => {
-    return http.get('/oms/access/permissions', {params: {objectId: 'openapi-system'}});
+    return http.get('/dhs-account/permissions', {params: {objectId: 'openapi-system'}});
   }
 };
 
