@@ -102,7 +102,7 @@
               </oms-form-row>
             </el-col>
             <el-col :span="8">
-              <oms-form-row label="错误信息" :span="8">
+              <oms-form-row label="请求解密内容" :span="8">
                 <oms-input type="text" v-model="searchWord.requestErrorMessage" placeholder="请输入错误信息"
                            @keyup.native.enter="searchInOrder"></oms-input>
               </oms-form-row>
@@ -184,7 +184,7 @@
           </div>
         </el-table-column>
         <el-table-column prop="requestStatusCode" label="HTTP状态码" :sortable="true" width="130"></el-table-column>
-        <el-table-column prop="requestErrorMessage" label="错误信息" :sortable="true" width="200"></el-table-column>
+        <el-table-column prop="requestErrorMessage" label="请求解密内容" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestException" label="异常信息" :sortable="true" width="200"></el-table-column>
         <el-table-column prop="requestHandleTime" label="请求处理时间" :sortable="true" width="130"></el-table-column>
         <el-table-column prop="requestSize" label="请求大小" :sortable="true" width="120"></el-table-column>
