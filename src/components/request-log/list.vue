@@ -81,8 +81,8 @@
               </oms-form-row>
             </el-col>
             <el-col :span="8">
-              <oms-form-row label="请求环境名称" :span="8">
-                <oms-input type="text" v-model="searchWord.requestApiStageName" placeholder="请输入请求环境名称"
+              <oms-form-row label="HTTP状态码" :span="8">
+                <oms-input type="text" v-model="searchWord.requestStatusCode" placeholder="请输入HTTP状态码"
                            @keyup.native.enter="searchInOrder"></oms-input>
               </oms-form-row>
             </el-col>
@@ -96,12 +96,6 @@
           <el-row>
 
             <el-col :span="8">
-              <oms-form-row label="HTTP状态码" :span="8">
-                <oms-input type="text" v-model="searchWord.requestStatusCode" placeholder="请输入HTTP状态码"
-                           @keyup.native.enter="searchInOrder"></oms-input>
-              </oms-form-row>
-            </el-col>
-            <el-col :span="8">
               <oms-form-row label="请求解密内容" :span="8">
                 <oms-input type="text" v-model="searchWord.requestErrorMessage" placeholder="请输入错误信息"
                            @keyup.native.enter="searchInOrder"></oms-input>
@@ -113,14 +107,14 @@
                            @keyup.native.enter="searchInOrder"></oms-input>
               </oms-form-row>
             </el-col>
-          </el-row>
-          <el-row>
             <el-col :span="8">
               <oms-form-row label="请求处理时间" :span="8">
                 <oms-input type="text" v-model="searchWord.requestHandleTime" placeholder="请输入请求处理时间"
                            @keyup.native.enter="searchInOrder"></oms-input>
               </oms-form-row>
             </el-col>
+          </el-row>
+          <el-row>
             <el-col :span="8">
               <oms-form-row label="请求大小" :span="8">
                 <oms-input type="text" v-model="searchWord.requestSize" placeholder="请输入请求大小"
@@ -133,17 +127,23 @@
                            @keyup.native.enter="searchInOrder"></oms-input>
               </oms-form-row>
             </el-col>
-          </el-row>
-          <el-row>
             <el-col :span="8">
               <oms-form-row label="请求body" :span="8">
                 <oms-input type="text" v-model="searchWord.requestBody" placeholder="请输入请求body"
                            @keyup.native.enter="searchInOrder"></oms-input>
               </oms-form-row>
             </el-col>
+          </el-row>
+          <el-row>
             <el-col :span="8">
               <oms-form-row label="响应body" :span="8">
                 <oms-input type="text" v-model="searchWord.responseBody" placeholder="请输入响应body"
+                           @keyup.native.enter="searchInOrder"></oms-input>
+              </oms-form-row>
+            </el-col>
+            <el-col :span="8">
+              <oms-form-row label="调用者应用ID" :span="8">
+                <oms-input type="text" v-model="searchWord.requestAppId" placeholder="请输入调用者应用ID"
                            @keyup.native.enter="searchInOrder"></oms-input>
               </oms-form-row>
             </el-col>
@@ -216,14 +216,36 @@
         showSearch: true,
         logList: [],
         filters: {
-          requestClientIp: '',
-          requestAppId: '',
+          requestDomain: '',
+          requestPath: '',
+          requestUrl:'',
+          requestStatusCode:'',
+          requestHttpMethod:'',
+          requestErrorMessage:'',
+          requestException:'',
+          requestHandleTime:'',
+          requestSize:'',
+          responseSize:'',
+          requestBody:'',
+          responseBody:'',
+          requestAppId:'',
           startTime: '',
           endTime: ''
         },
         searchWord: {
-          requestClientIp: '',
-          requestAppId: '',
+          requestDomain: '',
+          requestPath: '',
+          requestUrl:'',
+          requestStatusCode:'',
+          requestHttpMethod:'',
+          requestErrorMessage:'',
+          requestException:'',
+          requestHandleTime:'',
+          requestSize:'',
+          responseSize:'',
+          requestBody:'',
+          responseBody:'',
+          requestAppId:'',
           startTime: '',
           endTime: ''
         },
@@ -317,8 +339,19 @@
       },
       resetSearchForm: function () {// 重置表单
         this.searchWord = {
-          requestClientIp: '',
-          requestAppId: '',
+          requestDomain: '',
+          requestPath: '',
+          requestUrl:'',
+          requestStatusCode:'',
+          requestHttpMethod:'',
+          requestErrorMessage:'',
+          requestException:'',
+          requestHandleTime:'',
+          requestSize:'',
+          responseSize:'',
+          requestBody:'',
+          responseBody:'',
+          requestAppId:'',
           startTime: '',
           endTime: ''
         };
