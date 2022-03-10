@@ -1,4 +1,4 @@
-<style lang="scss" scoped="">
+<style lang="scss" scoped>
   @import "../../assets/scss/mixins";
 
   body {
@@ -75,7 +75,7 @@
                 <div style="width:300px;margin-right:50px">
                   <el-input v-model="resetUser.code"></el-input>
                 </div>
-                <div syle="line-height:0;">
+                <div style="line-height:0;">
                   <el-button :disabled="leftTime>0" @click="resendSMS">重新发送<span
                     v-show="leftTime>0">({{leftTime}})</span></el-button>
                 </div>
@@ -131,7 +131,7 @@
 </template>
 
 <script>
-  import {http, User} from '../../resources';
+  import {http, User} from '@/resources';
 
   const timeInterval = 60;
   let phoneReg = /^1[0-9]{10}$/;
@@ -143,15 +143,10 @@
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
-          let rl = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
-          if (!rl.test(self.resetUser.password)) {
-            callback('新密码必须包含数字、大写字母,小写字母,至少8-16个字符');
-          } else {
             if (self.resetUser.password2 !== '') {
               this.$refs.resetForm.validateField('password2');
             }
             callback();
-          }
         }
       };
       let validatePass2 = (rule, value, callback) => {
@@ -216,9 +211,7 @@
               this.userId = response.data.userId;
             }, error => {
               let data = error.response.data;
-              this.$notify.error({
-                message: data.msg
-              });
+              this.$notify.error(data.msg);
               this.getCode();
               this.loading = false;
             });
@@ -233,26 +226,18 @@
       resend: function () {
         http.get('/dhs/user/' + this.userId + '/password/verifyMail/resend').then(response => {// 验证
           this.user.email = response.data.email;
-          this.$notify.info({
-            message: '发送成功'
-          });
+          this.$notify.info('发送成功');
         }, () => {
-          this.$notify.error({
-            message: '发送失败,请联系管理员'
-          });
+          this.$notify.error('发送失败,请联系管理员');
         });
       },
       resendSMS: function () {
         this.leftTime = timeInterval;
         this.setTimer();
         http.get('/dhs/user/' + this.userId + '/password/verifySMS/resend').then(response => {// 验证
-          this.$notify.info({
-            message: '发送成功'
-          });
+          this.$notify.info('发送成功');
         }, () => {
-          this.$notify.error({
-            message: '发送失败,请联系管理员'
-          });
+          this.$notify.error('发送失败,请联系管理员');
         });
       },
       setTimer: function () {
@@ -269,15 +254,11 @@
             this.loading = true;
             let data = Object.assign({}, this.resetUser, {userId: this.userId});
             http.put('/dhs/user/phone/reset-psw', data).then(response => {// 验证
-              this.$notify.info({
-                message: '重置成功'
-              });
+              this.$notify.info('重置成功');
               this.$router.push('/login');
             }, error => {
               let data = error.response.data;
-              this.$notify.error({
-                message: data.msg
-              });
+              this.$notify.error(data.msg);
               this.getCode();
               this.loading = false;
             });

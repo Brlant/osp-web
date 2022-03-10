@@ -1,7 +1,7 @@
 {
   "name": "openapi-admin",
   "description": "openapi前台",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "author": "Hulk <jayzch@qq.com>",
   "private": true,
   "scripts": {
@@ -32,8 +32,8 @@
     "copy-webpack-plugin": "^4.6.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.2.3",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^6.0.7",
+    "sass": "^1.49.0",
+    "sass-loader": "^7.3.1",
     "vue-template-compiler": "^2.6.8"
   },
   "engines": {
