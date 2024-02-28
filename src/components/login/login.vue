@@ -32,15 +32,43 @@
     height: 100%;
     pointer-events: none;
   }
+  //用短信验证码登录
+  .login-style {
+    margin-bottom: 20px;
+
+    .btn {
+      color: deepskyblue;
+      right: 40px;
+      position: fixed;
+      top: 90px;
+      font-size: 16px;
+    }
+  }
+  .flex {
+    display: flex;
+    .cursor {
+      cursor: pointer;
+    }
+  }
+  .title {
+    margin: 0px auto 30px auto;
+    text-align: center;
+    color: #707070;
+  }
 </style>
 <template>
   <div>
     <el-card class="box-card main-card-box">
       <div class="logo-part clearfix"><img src="../../assets/img/logo_pic.png">开放接口平台</div>
 
+<!--      <div class="login-style">-->
+<!--        <el-button v-show="loginStyle === 0" class="btn" type="text" @click="changeLoginStyle(1)">用短信验证码登录</el-button>-->
+<!--        <el-button v-show="loginStyle === 1" class="btn" type="text" @click="changeLoginStyle(0)">用短信验证码登录</el-button>-->
+<!--      </div>-->
+
       <div style="padding:20px">
-        <el-form label-position="top" ref="loginForm" label-width="80px" :model="user" :rules="rules"
-                 @submit.prevent="done" onsubmit="return false">
+        <el-form v-show="loginStyle === 0" label-position="top" ref="loginForm" label-width="80px" :model="user" :rules="rules"
+                 @submit.prevent="onSubmit" onsubmit="return false">
           <el-form-item label="系统代码" prop="orgCode">
           <oms-input v-model="user.orgCode"></oms-input>
           </el-form-item>
@@ -61,10 +89,71 @@
           </el-form-item>
 
           <el-form-item label-width="80px">
-            <el-button type="primary" @click="done" style="display:block;width:100%;" native-type="submit">
+            <el-button type="primary" @click="onSubmit" style="display:block;width:100%;" native-type="submit">
               {{btnString}} <i class="el-icon-loading" v-show="loading"></i></el-button>
 
           </el-form-item>
+        </el-form>
+
+        <!--手机验证码登录-->
+<!--        <el-form v-show="loginStyle===1" class="login-form" label-position="top" ref="phoneForm" label-width="80px"-->
+<!--                 :model="user1" :rules="rules1"-->
+<!--                 onsubmit="return false">-->
+<!--          <el-form-item label="手机号" prop="phone">-->
+<!--            <oms-input v-model="user1.phone" placeholder="请输入手机号"></oms-input>-->
+<!--          </el-form-item>-->
+<!--          <el-form-item label="短信验证码" prop="validateCode">-->
+<!--            <div style="display:flex">-->
+<!--              <div style="width:320px;margin-right:50px">-->
+<!--                <el-input v-model="user1.validateCode" placeholder="请输入短信验证码"></el-input>-->
+<!--              </div>-->
+<!--              <div style="line-height:0;">-->
+<!--                <el-button :disabled="smsBtnDisabled" @click="sendSMS">{{ smsBtnText }}</el-button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </el-form-item>-->
+
+<!--          <el-form-item label-width="80px">-->
+<!--            <el-button type="primary" @click="phoneFormSubmit" style="display:block;width:100%;" native-type="submit">-->
+<!--              {{ btnString }} <i class="el-icon-loading" v-show="loading"></i></el-button>-->
+<!--          </el-form-item>-->
+<!--        </el-form>-->
+
+        <!--        二次认证登录-->
+        <el-form v-show="loginStyle===1" class="login-form" label-position="top" ref="phoneForm" label-width="80px"
+                 :model="user1" :rules="rules1"
+                 onsubmit="return false">
+          <div class="flex">
+            <i class="el-icon-arrow-left cursor" @click="goBack"></i>
+            <h3 class="title">二次认证</h3>
+          </div>
+          <el-form-item label="短信验证码" prop="validateCode">
+            <div style="display:flex">
+              <div style="width:300px;margin-right:50px">
+                <el-input v-model="user1.validateCode" placeholder="请输入短信验证码"></el-input>
+              </div>
+              <div style="line-height:0;">
+                <el-button :disabled="smsBtnDisabled" style="width: 110px" @click="sendSMS">{{ smsBtnText }}</el-button>
+              </div>
+            </div>
+          </el-form-item>
+
+          <drag-verify
+            ref="dragVerify"
+            :isPassing.sync="isPassing"
+            style="margin-bottom: 20px;width: 460px;"
+            :width="460"
+            text="请按住滑块,拖动到最右边"
+            handlerIcon="el-icon-d-arrow-right"
+            successIcon="el-icon-circle-check"
+            background="#ccc"
+            successText="验证通过"
+            progressBarBg="#67c23a"
+            @passcallback="handlePass"
+            @passfail="handleFail"
+          >
+          </drag-verify>
+
         </el-form>
       </div>
     </el-card>
@@ -75,15 +164,17 @@
 </template>
 
 <script>
-  import {Auth, LogisticsCenter} from '../../resources';
+  import {Auth, LogisticsCenter,http} from '../../resources';
   import AppFooter from '../layout/app.footer.vue';
   import {base64} from '@dtop/dtop-web-common';
-
+  import dragVerify from "vue-drag-verify2";
   export default {
     name: 'login',
-    components: {AppFooter},
+    components: {AppFooter,dragVerify},
     data: () => {
       return ({
+        // 登录方式：0-账号密码登录，1-手机验证码登录
+        loginStyle: 0,
         user: {
           username: '',
           password: '',
@@ -106,10 +197,131 @@
             {required: true, message: '请输入密码', trigger: 'blur'}
           ]
         },
-        logisticsCenters: []
+        logisticsCenters: [],
+        //短信验证
+        user1: {
+          phone: '',
+          validateCode: '',
+          type: 0
+        },
+        rules1: {
+          phone: [
+            {
+              required: true,
+              validator: (rule, value, callback) => {
+                if (!value) {
+                  callback(new Error('请输入手机号'));
+                } else {
+                  if (!/^1[0-9]{10}$/.test(value)) {
+                    callback(new Error('请输入正确的手机号'));
+                  }else {
+                    callback();
+                  }
+                }
+              }, trigger: 'blur'
+            }
+          ],
+          validateCode: [
+            {required: true, message: '请输入验证码', trigger: 'blur'}
+          ],
+          // password: [
+          //   {required: true, message: '请输入密码', trigger: 'blur'}
+          // ]
+        },
+        maxTimes: 60,
+        leftTime: 0,
+        smsBtnText: '获取验证码',
+        isPassing: false,
       });
     },
+    computed: {
+      // smsBtnDisabled() {
+      //   return !/^1[0-9]{10}$/.test(this.user1.phone) || this.leftTime > 0;
+      // }
+      smsBtnDisabled() {
+        return this.leftTime > 0;
+      }
+    },
     methods: {
+      //切换
+      changeLoginStyle(loginStyle) {
+        this.loginStyle = loginStyle;
+      },
+      sendSMS: function () {
+        this.leftTime = this.maxTimes;
+        this.setTimer();
+        http.post('/sendSms', {phone: this.user1.phone}).then(response => {// 验证
+          this.$notify.info({
+            message: '发送成功'
+          });
+        }, () => {
+          this.$notify.error({
+            message: '发送失败,请联系管理员'
+          });
+        });
+      },
+      setTimer: function () {
+        if (this.leftTime > 0) {
+          this.leftTime = this.leftTime - 1;
+          this.smsBtnText = this.leftTime + 's';
+          setTimeout(() => {
+            this.setTimer();
+          }, 1000);
+        } else {
+          this.smsBtnText = '重新发送';
+        }
+      },
+      phoneFormSubmit() {
+        this.$refs['phoneForm'].validate((valid) => {
+          if (valid) {
+            this.btnString = '登陆中..';
+            this.loading = true;
+            Auth.loginByPhone(this.user1).then(response => {
+              let userId = window.localStorage.getItem('userId');
+              this.$store.commit('initCode', this.user.orgCode);
+              this.$store.commit('initUser', response.data);
+              this.$nextTick(function () {
+                this.$router.push('/');
+              });
+            }, error => {
+              let data = error.response.data;
+              this.$notify.error({
+                message: data.msg
+              });
+              if (data.code === 101 || data.code === 100) {
+                this.getCode();
+              }
+              this.btnString = '登陆';
+              this.loading = false;
+            });
+          }
+        });
+      },
+      // 二次验证登录
+      handlePass() {
+        console.log('验证成功')
+      },
+
+      // 验证失败
+      handleFail() {
+        this.resetDragVerify();
+      },
+      // 还原至未验证通过状态
+      resetDragVerify() {
+        this.isPassing = false;
+        this.$refs.dragVerify.reset();
+      },
+      goBack() {
+        this.loginStyle = 0;
+        this.user1 = {
+          validateCode:null,
+        }
+        this.$refs.phoneForm.resetFields();
+        this.handleFail();
+      },
+      onSubmit(){
+        this.loginStyle = 1;
+      },
       done() {
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {

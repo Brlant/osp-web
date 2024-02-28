@@ -206,6 +206,10 @@ export const Auth = {
   login: (data) => {
     return http.post('/dhs/login', data);
   },
+  // 短信登录接口：/login/phone
+  loginByPhone: (data) => {
+    return http.post('/login/phone', data);
+  },
   logout: () => {
     return http.get('/dhs/logout');
   },
